@@ -1,9 +1,12 @@
 { pkgs, lib, ... }:
 
 {
+  home.sessionVariables = {
+    REQUESTS_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
+  };
+
   home.packages = with pkgs; [
     httpie
-    tree
     tldr
     bat
     trashy
@@ -53,8 +56,10 @@
       "egrep" = "egrep --color=auto";
 
       "ls" = "eza";
-      "ll" = "ls -alF";
+      "ll" = "ls -alhuUF --git";
       "la" = "ls -A";
+      
+      "tree" = "eza --tree";
 
       "tp" = "trash put";
       "tl" = "trash list";
@@ -67,8 +72,6 @@
 
       "nix-gc" = "nix-collect-garbage -d && nix-store --optimize && nix-collect-garbage -d";
       "nix-shell" = "nix-shell --command zsh";
-
-      "http" = "http --verify no";
     };
 
     initExtra = ''

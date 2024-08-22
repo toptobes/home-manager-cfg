@@ -28,7 +28,7 @@
     aliases = {
       oops = "!git commit -a --amend --no-edit";
       yolo = "!git commit -am \"$(curl -s https://whatthecommit.com/index.txt)\"";
-      lg   = "!git log --graph --pretty=format:'%Cred%h %Cblue%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative";
+      lg   = "!git log --graph --pretty=format:'%Cred%h %Cblue%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative -10";
     };
 
     difftastic = {
