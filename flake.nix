@@ -11,10 +11,12 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      localpkgs = import ./packages pkgs;
     in {
       homeConfigurations.me = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home.nix ];
+        extraSpecialArgs = { inherit localpkgs; };
       };
     };
 }

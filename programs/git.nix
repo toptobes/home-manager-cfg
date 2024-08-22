@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, localpkgs, lib, ... }:
 
 {
   home.packages = [
@@ -15,6 +15,7 @@
     extensions = with pkgs; [
       gh-poi
       gh-markdown-preview
+      localpkgs.gh-debug-cli
     ];
   };
 
