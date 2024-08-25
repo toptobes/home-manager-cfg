@@ -1,5 +1,36 @@
 { pkgs, lib, ... }:
 
+let 
+  mkcd = pkgs.writeShellScriptBin "mkcd" ''
+    mkdir -p -- "$1" && cd -P -- "$_" || exit
+  '';
+
+  nix-prefetch-sri = pkgs.writeShellScriptBin "nix-prefetch-sri" ''
+    nix-prefetch-url "$1" | xargs nix hash convert --hash-algo sha256
+  '';
+
+  git-release-hashes = pkgs.writeShellScriptBin "git-release-hashes" ''
+    url="$1"; shift
+
+    echo 'inherit (pkgs.stdenv.hostPlatform) system;'
+    echo 
+    echo 'releases = {'
+
+    for system_release in "$@"; do
+      system="${"\${system_release%%:*}"}"
+      release="${"\${system_release##*:}"}"
+      hash=$(nix-prefetch-sri "$url"/"$release" 2> /dev/null)
+
+      echo "  \"$system\" = {"
+      echo "    name = \"$release\";"
+      echo "    hash = \"$hash\";"
+      echo "  };"
+    done
+
+    echo '}.''${system} or (throw "Unsupported system: ''${system}");'
+  '';
+in
+
 {
   home.sessionVariables = {
     REQUESTS_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
@@ -12,6 +43,9 @@
     trashy
     eza
     jq
+    mkcd
+    nix-prefetch-sri
+    git-release-hashes
   ];
 
   programs.vim = {
@@ -204,12 +238,6 @@
       *)
         ;;
       esac
-
-      # utility functions
-      mkcd()
-      {
-        mkdir -p -- "$1" && cd -P -- "$_" || exit
-      }
     '';
 
     logoutExtra = ''

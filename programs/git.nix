@@ -1,4 +1,4 @@
-{ pkgs, localpkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.packages = [
@@ -15,7 +15,6 @@
     extensions = with pkgs; [
       gh-poi
       gh-markdown-preview
-      localpkgs.gh-debug-cli
     ];
   };
 
@@ -24,7 +23,7 @@
     package = pkgs.gitAndTools.gitFull;
 
     userName = "toptobes";
-    userEmail = "kavinpg@gmail.com";
+    userEmail = import ./secrets/email.nix;
 
     aliases = {
       oops = "!git commit -a --amend --no-edit";
