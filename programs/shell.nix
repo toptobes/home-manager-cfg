@@ -89,11 +89,10 @@ in
       "fgrep" = "fgrep --color=auto";
       "egrep" = "egrep --color=auto";
 
-      "ls" = "eza";
-      "ll" = "ls -alhuUF --git";
-      "la" = "ls -A";
-      
-      "tree" = "eza --tree";
+      "ls"   = "eza -s type";
+      "ll"   = "ls -alhuUF --git";
+      "la"   = "ls -A -s type";
+      "tree" = "ls --tree -s type";
 
       "tp" = "trash put";
       "tl" = "trash list";
