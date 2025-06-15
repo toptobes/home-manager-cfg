@@ -9,11 +9,11 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      system = "x86_64-linux";
+      system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
       # localpkgs = import ./packages pkgs;
     in {
-      homeConfigurations.me = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."kavin.gupta" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home.nix ];
         # extraSpecialArgs = { inherit localpkgs; };

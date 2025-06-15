@@ -6,8 +6,8 @@
   imports = map (n: "${./programs}/${n}") (builtins.filter (lib.hasSuffix ".nix") (builtins.attrNames (builtins.readDir ./programs)));
 
   home = {
-    username = "me";
-    homeDirectory = "/home/me";
+    username = "kavin.gupta";
+    homeDirectory = "/Users/kavin.gupta";
     
     stateVersion = "24.05";
 
@@ -17,5 +17,5 @@
   };
 
   programs.home-manager.enable = true;
-  targets.genericLinux.enable = true;
+  #targets.genericLinux.enable = true;
 }

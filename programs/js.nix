@@ -2,14 +2,6 @@
 
 {
   home.packages = [
-    pkgs.nodejs_20
+    pkgs.nodejs_22
   ];
-
-  programs.bun = {
-    enable = true;
-
-    settings = {
-      telemetry = false;
-    };
-  };
 }

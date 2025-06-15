@@ -40,12 +40,12 @@ in
     httpie
     tldr
     bat
-    trashy
     eza
     jq
     mkcd
     nix-prefetch-sri
     git-release-hashes
+    cloc
   ];
 
   programs.vim = {
@@ -97,7 +97,8 @@ in
       "tp" = "trash put";
       "tl" = "trash list";
 
-      "cl" = "precmd() { precmd() { echo } } && clear";
+      # "cl" = "precmd() { precmd() { echo } } && clear && printf '\\e[3J'";
+      "cl" = "clear && printf '\\e[3J'";
 
       "bat" = "bat -P";
       ".."  = "cd ..";
@@ -133,6 +134,13 @@ in
       # https://github.com/zsh-users/zsh-autosuggestions/issues/265#issuecomment-339235780
       # https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
       zvm_after_init_commands+=('bindkey ^F vi-forward-word && bindkey ^B vi-backward-word')
+
+      export PATH="$HOME/.cargo/bin:$PATH"
+      export REQUESTS_CA_BUNDLE="$HOME/.mac-ca-roots"
+
+      if [ -f  /opt/homebrew/etc/bash_completion.d ]; then
+      .  /opt/homebrew/etc/bash_completion.d
+      fi
     '';
 
     profileExtra = ''
@@ -148,6 +156,8 @@ in
       if [ -d "$HOME/.local/bin" ] ; then
         PATH="$HOME/.local/bin:$PATH"
       fi
+
+      eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
 
     plugins = [
