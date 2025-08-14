@@ -5,6 +5,7 @@
     awscli2
     azure-cli
     google-cloud-sdk
+    podman
   ];
 
   programs.vscode = {

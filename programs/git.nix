@@ -24,7 +24,7 @@
     package = pkgs.gitAndTools.gitFull;
 
     userName = "toptobes";
-    userEmail = import ./secrets/email.nix;
+    userEmail = "kavinpg@gmail.com";
 
     aliases = {
       oops  = "!git commit -a --amend --no-edit";
