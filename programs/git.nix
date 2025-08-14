@@ -3,6 +3,7 @@
 {
   home.packages = [
     pkgs.gh
+    pkgs.git-crypt
   ];
 
   programs.gh = {
@@ -23,7 +24,7 @@
     package = pkgs.gitAndTools.gitFull;
 
     userName = "toptobes";
-    userEmail = "kavinpg@gmail.com";
+    userEmail = import ./secrets/email.nix;
 
     aliases = {
       oops  = "!git commit -a --amend --no-edit";

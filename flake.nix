@@ -13,7 +13,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
       # localpkgs = import ./packages pkgs;
     in {
-      homeConfigurations."kavin.gupta" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."me" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home.nix ];
         # extraSpecialArgs = { inherit localpkgs; };

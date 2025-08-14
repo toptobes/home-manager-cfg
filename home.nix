@@ -1,13 +1,18 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
+
+let
+  username = "me";
+  homeDirectory = "/Users/${username}";
+in
 
 {
   nixpkgs.config.allowUnfreePredicate = (_: true);
   
-  imports = map (n: "${./programs}/${n}") (builtins.filter (lib.hasSuffix ".nix") (builtins.attrNames (builtins.readDir ./programs)));
+  imports = (map (n: "${./programs}/${n}") (builtins.filter (lib.hasSuffix ".nix") (builtins.attrNames (builtins.readDir ./programs))));
 
   home = {
-    username = "kavin.gupta";
-    homeDirectory = "/Users/kavin.gupta";
+    username = username;
+    homeDirectory = homeDirectory;
     
     stateVersion = "24.05";
 

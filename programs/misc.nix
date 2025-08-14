@@ -6,4 +6,8 @@
     azure-cli
     google-cloud-sdk
   ];
+
+  programs.vscode = {
+    enable = true;
+  };
 }
